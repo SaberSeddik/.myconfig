@@ -1,0 +1,15 @@
+! urxvt
+
+URxvt*geometry:             259x120
+URxvt*font:                 xft:DejavuSansMono:pixelsize=14
+URxvt*depth:                32
+URxvt*background:           [100]#000000
+URxvt*foreground:           [100]#ffffff
+URxvt*borderless:           1
+URxvt*scrollBar:            false
+URxvt*saveLines:            5000
+URxvt*termName:             rxvt-unicode
+URxvt.perl-ext-common:      default,matcher,selection-to-clipboard
+URxvt.urlLauncher:          firefox
+URxvt.matcher.button:       1
+

@@ -1,0 +1,40 @@
+#!/bin/zsh
+
+autoload -Uz vcs_info 
+setopt PROMPT_SUBST
+
+# TODO Add explanation here
+zstyle ':vcs_info:*' formats '%u%F{0}%b%f%c'
+zstyle ':vcs_info:*' actionformats '%u%F{1}%b/%a%f%c'
+
+zstyle ':vcs_info:bzr:*' use-simple true
+
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '*'
+zstyle ':vcs_info:*' unstagedstr '*'
+
+# fast and super ugly git command(s)
+_git_branch () {
+    branchname=`cat $(git rev-parse --show-toplevel)/.git/HEAD`
+    echo ${branchname//ref: refs\/heads\//}
+}
+
+#Hook Executed before each prompt.
+#See http://zsh.sourceforge.net/Doc/Release/Functions.html
+precmd () {
+    vcs_info
+    CURRENT_FOLDER='%F{green}%~%f'
+    [[ ! -z ${vcs_info_msg_0_} ]] && GIT_INFO='[%B${vcs_info_msg_0_}%b]' || GIT_INFO=
+    PROMPT='%B%(?..[%?] )%b%n@%U%m%u> '
+    RPROMPT=" ${CURRENT_FOLDER}${GIT_INFO}" 
+}
+
+function zle-line-init zle-keymap-select {
+    precmd
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $RPROMPT $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
