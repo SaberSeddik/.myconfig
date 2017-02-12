@@ -1,7 +1,7 @@
 ! urxvt
 
 URxvt*geometry:             259x120
-URxvt*font:                 xft:DejavuSansMono:pixelsize=14
+URxvt*font:                 xft:inconsolata:pixelsize=14
 URxvt*depth:                32
 URxvt*background:           [100]#000000
 URxvt*foreground:           [100]#ffffff
