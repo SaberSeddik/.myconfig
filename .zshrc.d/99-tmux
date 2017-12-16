@@ -1,7 +1,0 @@
-#!/bin/zsh
-# Load tmux by default
-if ! which tmux >/dev/null 2>&1; then
-   module load tmux
-fi
-[[ -z "$TMUX" ]] && (tmux attach || tmux -u)
-
