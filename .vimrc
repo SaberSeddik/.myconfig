@@ -1,3 +1,8 @@
+" Disable compatible mode with old VI
+set nocompatible
+" will enable the paste mode as answered above
+"set paste
+set pastetoggle=<F10>
 " Set to auto read when a file is changed from the outside
 set autoread
 " Turn on the WiLd menu
