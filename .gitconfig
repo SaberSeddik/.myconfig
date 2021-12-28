@@ -1,0 +1,50 @@
+[alias]
+    stat = status
+    l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'  --abbrev-commit
+    amend = commit --amend --no-edit -a
+    sup = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD` 
+    poh = push -u origin HEAD
+    current = symbolic-ref --short HEAD
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    chmodx = update-index --chmod=+x
+    ru = "!f() { \
+        REMOTES=$(git remote); \
+        REMOTE=\"origin\"; \
+        case \"$REMOTES\" in \
+            *main-repo*) \
+                REMOTE=\"main-repo\"; \
+                ;; \
+           esac; \
+        git fetch $REMOTE; \
+        git update-ref refs/heads/master refs/remotes/$REMOTE/master; \
+        git checkout master >/dev/null 2>&1; \
+        git reset --hard $REMOTE/master >/dev/null 2>&1; \
+        git checkout - >/dev/null 2>&1; \
+    }; f"
+    foh = "!f() { \
+        git fetch origin >/dev/null; \
+        git reset --hard @{u};\
+    }; f"
+    apoh= "!f() { \
+        git amend; \
+        git poh -f;\
+    }; f"
+    rb= "!f() { \
+        git fetch origin >/dev/null; \
+        git rebase origin/$1;\
+    }; f"
+    rsh= "!f() { \
+        git fetch origin >/dev/null; \
+        git reset --hard origin/$1;\
+    }; f"
+    rl = reflog --date=iso
+[user]
+    email = Seddik.Saber@gmail.com
+    name = Saber Seddik
+[core]
+    editor = vi
+	longpaths = true
+[credential]
+	helper = manager
+[push]
+    default = simple
